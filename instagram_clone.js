@@ -18,6 +18,12 @@ var imgArray = [
     },
     {
     im: 'Photos/6.jpg'
+    },
+    {
+    im:'Photos/7.jpg'
+    },
+    {
+    im:'Photos/8.jpg'
     }
 ]
 //Images of the Gallery
