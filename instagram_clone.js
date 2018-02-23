@@ -41,6 +41,9 @@ var closeLightBox = function(){
     lightBoxContainer.classList.remove('active');
 }
 
+var currentImage;
+var lightBoxElement = document.querySelector('.light-box-image')
+
 //Click the image to open the lightbox
 imgArray.forEach(function (picture) {
     var imgElement = document.createElement('img');
@@ -49,11 +52,11 @@ imgArray.forEach(function (picture) {
     imgContainer.appendChild(imgElement);
 
     imgElement.addEventListener('click', function(event){
-        var lightBoxElement = document.querySelector('.light-box-image')
         lightBoxElement.src = source;
         openLightBox();
-    })
-});
+    currentImage = imgArray.indexOf(picture);
+        });
+    });
 
 //closing the light box
 var closeButton = document.querySelector('.close-button');
@@ -61,3 +64,17 @@ closeButton.addEventListener('click', function(event) {
     event.preventDefault();
     closeLightBox();
 });
+
+//left button 
+var leftButton = document.querySelector('.left-button');
+leftButton.addEventListener('click',function(event){
+    currentImage--;
+    lightBoxElement.src = imgArray[currentImage].im;
+});
+
+//right button
+var rightButton = document.querySelector('.right-button');
+    rightButton.addEventListener('click',function(event){
+        currentImage++;
+        lightBoxElement.src = imgArray[currentImage].im;
+    })
