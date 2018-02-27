@@ -1,4 +1,4 @@
-var body = document.querySelector('.body-container');
+var $body = $('.body-container');
 
 var imgArray = [ 
     {
@@ -30,51 +30,54 @@ var imgArray = [
     }
 ]
 //Images of the Gallery
-var imgContainer =  document.querySelector('.body-container');
-var lightBoxContainer = document.querySelector('.light-box');
+var $imgContainer =  $(".body-container");
+var $lightBoxContainer = $(".light-box");
 
 //function for opening and closing light box.
 var openLightBox = function() {
-    lightBoxContainer.classList.add('active');
+    $lightBoxContainer.addClass('active');
 }
 var closeLightBox = function(){
-    lightBoxContainer.classList.remove('active');
+    $lightBoxContainer.removeClass('active');
 }
 
 var currentImage;
-var lightBoxElement = document.querySelector('.light-box-image')
+var $lightBoxElement = $(".light-box-image")
 
 //Click the image to open the lightbox
 imgArray.forEach(function (picture) {
-    var imgElement = document.createElement('img');
-    imgElement.src = picture.im;
-    var source = imgElement.src;
-    imgContainer.appendChild(imgElement);
+    var $imgElement = $("<img>", {
+        'src': picture.im
+    });
+    $imgContainer.append($imgElement);
 
-    imgElement.addEventListener('click', function(event){
-        lightBoxElement.src = source;
+    $imgElement.on('click', function(event){
+        $lightBoxElement.attr("src", picture.im);
         openLightBox();
     currentImage = imgArray.indexOf(picture);
         });
     });
 
 //closing the light box
-var closeButton = document.querySelector('.close-button');
-closeButton.addEventListener('click', function(event) {
+var $closeButton = $('.close-button');
+$closeButton.on('click', function(event) {
     event.preventDefault();
     closeLightBox();
 });
 
 //left button 
-var leftButton = document.querySelector('.left-button');
-leftButton.addEventListener('click',function(event){
+var $leftButton = $('.left-button');
+$leftButton.on('click',function(event){
     currentImage--;
-    lightBoxElement.src = imgArray[currentImage].im;
+    //way to set source of image in jquery .attr
+    $lightBoxElement.attr('src', imgArray[currentImage].im);
 });
 
 //right button
-var rightButton = document.querySelector('.right-button');
-    rightButton.addEventListener('click',function(event){
+var $rightButton = $('.right-button');
+    $rightButton.on('click',function(event){
         currentImage++;
-        lightBoxElement.src = imgArray[currentImage].im;
+        $lightBoxElement.attr('src', imgArray[currentImage].im);
     })
+
+
